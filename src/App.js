@@ -1,42 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Table from './Table'
 
-class Content extends Component {
-  render(){
-    return (
-      <article>
-        <h2>Welcome</h2>
-        Hello React.
-      </article>
 
-    )
+
+
+
+class App extends Component {
+  state = {
+    characters: [
+      {
+        name: 'Charlie',
+        job : 'programmer'
+        // the rest of the data
+      },
+    ],
   }
-}
-class  Content1 extends Component {
-  render(){
-    return (
-      <article>
-        <h2>Welcome</h2>
-        Hello React.
-      </article>
-
-    )
+  removeCharacter = index => {
+    const { characters } = this.state
+  
+    this.setState({
+      characters: characters.filter((character, i) => {
+        return i !== index
+      }),
+    })
   }
-}
-
-
-function App() {
-  return (
-    <div className="Content">
-      <Content/>
+  render() {
+    const {characters} =  this.state
       
-      Hello React
-    </div>
-    <div className="Content1">
-    <Content/>
     
-    Hello React
-  </div>
-  );
+    return (
+      <div className="container">
+        <Table characterData={characters} removeCharacter={this.removeCharacter} />
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
